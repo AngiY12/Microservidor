@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/traccar_devices
+      SPRING_DATASOURCE_USERNAME: traccar_user
+      SPRING_DATASOURCE_PASSWORD: 123
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: traccar_devices
+      POSTGRES_USER: traccar_user
+      POSTGRES_PASSWORD: 123
+    ports:
+      - "5433:5432"
